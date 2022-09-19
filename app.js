@@ -1,15 +1,14 @@
-const board = document.getElementById('board');
-const colors = ['#e74c3c', '#8c44ad', '#3498db', '#e67e22', '#2ecc71'];
-const SQUARES_NUMBER = 500;
+function insertTouchPads(container, squaresNumbers) {
+    for(let i = 0; i < squaresNumbers; ++i) {
+        const square = document.createElement('div');
+        square.classList.add('square');
+        square.addEventListener('mouseleave', event => setColor(event.target, '#1d1d1d'));
+        
+        container.appendChild(square);
+    }
 
-for(let i = 0; i < SQUARES_NUMBER; ++i) {
-    const square = document.createElement('div');
-    square.classList.add('square');
-    square.addEventListener('mouseleave', event => setColor(event.target, '#1d1d1d'));
-    board.appendChild(square);
+    container.addEventListener('mouseover', onMouseOver);
 }
-
-board.addEventListener('mouseover', onMouseOver);
 
 function setColor(element, color) {
     element.style.backgroundColor = color;
@@ -26,3 +25,6 @@ function onMouseOver(event) {
         setColor(event.target, getRandomColor());
     }
 }
+
+const colors = ['#e74c3c', '#8c44ad', '#3498db', '#e67e22', '#2ecc71'];
+insertTouchPads(board, 500);
